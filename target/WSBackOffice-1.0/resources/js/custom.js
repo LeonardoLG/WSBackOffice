@@ -8,7 +8,7 @@ function initMap() {
         zoom: 18,
         center: {lat: -7.171757, lng: -78.478472}
     });
-    
+
     setMarkers1(map);
     //soap();
 }
@@ -62,36 +62,48 @@ function setMarkers1(map) {
 }
 
 function soap() {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open('POST', 'http://lleon:8380/WSCore/serviciosGanado', true);
 
-    // build SOAP request
-    var sr =
-            '<?xml version="1.0" encoding="utf-8"?>' +
-            '<soapenv:Envelope ' +
-            'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ' +
-            //           'xmlns:api="http://127.0.0.1/Integrics/Enswitch/API" ' +
-            'xmlns:wsc="http://wscore.ws.lleon.com/" ' +
-            'xmlns:xsd="http://www.w3.org/2001/XMLSchema" ' +
-            'xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"> ' +
-            '<soapenv:Body>' +
-            '<wsc:obtenerUbicaciones/>' +
-            '</soapenv:Body>' +
-            '</soapenv:Envelope>';
+    $.ajax({
+        url: "http://192.168.1.40:8090/WSCore/resources/service"
+    }).then(function (data) {
+//       $('.greeting-id').append(data.id);
+//       $('.greeting-content').append(data.content);
+        console.log("EXITO");
+    });
+}
 
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4) {
-            if (xmlhttp.status == 200) {
-                //alert(xmlhttp.responseText);
-                var xmlDoc = xmlhttp.responseXML;
-                var ubicaciones = obtenerArrayNodosPorTag(xmlDoc, 'ubicacion');
-                setMarkers2(map, ubicaciones)
-            }
+function soap1() {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://192.168.1.40:8090/WSCore/resources/service', true);
+    request.onload = function () {
+
+        // Begin accessing JSON data here
+        var data = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+//            data.forEach(movie => {
+//                const card = document.createElement('div');
+//                card.setAttribute('class', 'card');
+//
+//                const h1 = document.createElement('h1');
+//                h1.textContent = movie.title;
+//
+//                const p = document.createElement('p');
+//                movie.description = movie.description.substring(0, 300);
+//                p.textContent = `${movie.description}...`;
+//
+//                container.appendChild(card);
+//                card.appendChild(h1);
+//                card.appendChild(p);
+//            });
+            console.log("EXITO");
+            console.log(data);
+        } else {
+            console.log("ERRROR");
+            errorMessage.textContent = `Gah, it's not working!`;
+            app.appendChild(errorMessage);
         }
     }
-    // Send the POST request
-    xmlhttp.setRequestHeader('Content-Type', 'text/xml');
-    xmlhttp.send(sr);
+    request.send();
 }
 
 function obtenerArrayNodosPorTag(nodoRaiz, nombreTag) {
@@ -100,13 +112,13 @@ function obtenerArrayNodosPorTag(nodoRaiz, nombreTag) {
 }
 
 function setMarkers2(map, ubicaciones) {
-    // Adds markers to the map.
+// Adds markers to the map.
 
-    // Marker sizes are expressed as a Size of X,Y where the origin of the image
-    // (0,0) is located in the top left of the image.
+// Marker sizes are expressed as a Size of X,Y where the origin of the image
+// (0,0) is located in the top left of the image.
 
-    // Origins, anchor positions and coordinates of the marker increase in the X
-    // direction to the right and in the Y direction down.
+// Origins, anchor positions and coordinates of the marker increase in the X
+// direction to the right and in the Y direction down.
     var image = {
         url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
         // This marker is 20 pixels wide by 32 pixels high.
@@ -130,7 +142,6 @@ function setMarkers2(map, ubicaciones) {
             map: map,
             icon: image,
             shape: shape,
-            
             zIndex: parseFloat(obtenerArrayNodosPorTag(beach, 'zIndex')[0].textContent)
         });
     }
