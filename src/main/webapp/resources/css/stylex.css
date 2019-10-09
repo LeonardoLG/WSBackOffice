@@ -1,0 +1,60 @@
+h1,h3{
+	text-align:center;
+}
+
+div#principal{
+	margin-top:10px;
+	margin:auto;
+    width:1250px; 
+	height:700px;
+}
+
+div#map_principal{
+	float:left;
+	margin:auto;
+    width:800px; 
+	height:600px;
+	border:2px solid green;
+}
+
+div#map{
+	margin-top:10px;
+	margin-left:10px;
+	float:left;
+    position:relative;
+    width:600px;
+    height:570px;
+    border:2px solid;
+}
+
+div#map_descripcion{
+	margin-top:10px;
+	margin-left:10px;
+	float:left;
+	width:150px;
+    height:570px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+div#alerta_principal{
+	margin-left:10px;
+	float:right;
+	width:400px;
+    height:600px;
+	border:2px solid red;
+}
+
+div#alerta_real{
+	margin-left:10px;
+	float:right;
+	width:300px;
+    height:150px;
+}
+div#alerta_lista{
+	margin-left:10px;
+	float:right;
+	width:300px;
+    height:400px;
+}
