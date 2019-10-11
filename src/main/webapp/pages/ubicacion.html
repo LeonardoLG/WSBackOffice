@@ -29,7 +29,7 @@
                     <iframe src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXgu_x1FWqhKibhg2EtDKHIDgp-ClAO40&callback=initMap" frameborder="0" style="border:0"></iframe>
                 </div>
                 <div id="map_descripcion">
-                    <button type="button" class="btn btn-success" onclick="actualizarUbicaciones();">Actualizar</button>
+                    <button type="button" class="btn btn-success" onclick="actualizar();">Actualizar</button>
                 </div>
             </div>
             <div id="alerta_principal">
@@ -37,6 +37,19 @@
                 <div id="alerta_real">
                 </div>
                 <div id="alerta_lista">
+                    <div class="table-responsive">          
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nro</th>                       
+                                    <th>Ganado</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tab_alerta">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
