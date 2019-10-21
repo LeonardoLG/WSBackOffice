@@ -12,12 +12,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
 
-    <body onLoad="setInterval('actualizar()',1000);">
+    <body onLoad="setInterval('actualizarUbicaciones()', 10000);">
         <div id="header" class="container">
             <nav class="nav">
                 <a class="nav-link active" href="ubicacion.html">Monitoreo de la Ubicacion</a>
                 <a class="nav-link" href="reportes.html">Historial de Alertas</a>
-<!--                <a class="nav-link" href="alimentacion.html">Monitoreo de la Alimentacion</a>-->
+                <!--                <a class="nav-link" href="alimentacion.html">Monitoreo de la Alimentacion</a>-->
             </nav>
         </div>
 
@@ -29,25 +29,23 @@
                 <div id="map">
                     <iframe src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXgu_x1FWqhKibhg2EtDKHIDgp-ClAO40&callback=initMap" frameborder="0" style="border:0"></iframe>
                 </div>
-<!--                <div id="map_descripcion">
-                    <button type="button" class="btn btn-success" onclick="actualizar();">Actualizar</button>
-                </div>-->
+                <!--                <div id="map_descripcion">
+                                    <button type="button" class="btn btn-success" onclick="actualizar();">Actualizar</button>
+                                </div>-->
             </div>
             <div id="alerta_principal">
                 <h3>Lista de Alertas</h3>
                 <div id="alerta_real">
-                </div>
-                <div id="alerta_lista">
                     <div class="table-responsive">          
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Nro</th>                       
+                                    <th></th>                       
                                     <th>Ganado</th>
                                     <th>Fecha</th>
                                 </tr>
                             </thead>
-                            <tbody id="tab_alerta">
+                            <tbody id="tab_alerta_real">
                             </tbody>
                         </table>
                     </div>
