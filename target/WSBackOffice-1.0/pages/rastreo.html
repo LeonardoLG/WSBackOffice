@@ -12,7 +12,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
 
-    <body onLoad="setInterval('actualizarUbicaciones()', 10000);">
+    <body>
         <div id="header" class="container">
             <nav class="nav">
                 <a class="nav-link active" href="ubicacion.html">Monitoreo de la Ubicacion</a>
@@ -22,33 +22,20 @@
         </div>
 
         <div id="title" class="container">
-            <h1>Mapa del Ganado Actual</h1>
+            <h1>Rastreo del Camino Trazado por el Ganado</h1>
         </div>
-        <div id="principal">
-            <div id="map_principal">
+        <div id="filtros">
+            <label style="margin-right: 10px">Ganado: </label>
+            <select id="traza_ganado" name="traza_ganado">
+                <option>Ganado 1</option>
+                <option>Ganado 2</option>
+            </select>
+            <button type="submit" class="btn btn-primary mb-2" onclick="buscarTrazado();">Buscar Trazado</button>
+        </div>
+        <div id="traza_ganado_principal">
+            <div id="traza_busqueda">
                 <div id="map">
                     <iframe src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXgu_x1FWqhKibhg2EtDKHIDgp-ClAO40&callback=initMap" frameborder="0" style="border:0"></iframe>
-                </div>
-                <!--                <div id="map_descripcion">
-                                    <button type="button" class="btn btn-success" onclick="actualizar();">Actualizar</button>
-                                </div>-->
-            </div>
-            <div id="alerta_principal">
-                <h3>Lista de Alertas</h3>
-                <div id="alerta_real">
-                    <div class="table-wrapper-scroll-y my-custom-scrollbar">          
-                        <table  class="table table-bordered table-striped mb-0">
-                            <thead>
-                                <tr>
-                                    <th></th>                       
-                                    <th>Ganado</th>
-                                    <th>Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tab_alerta_real">
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>

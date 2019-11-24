@@ -9,11 +9,27 @@ div#principal{
     height:700px;
 }
 
+div#traza_ganado_principal{
+    margin-top:10px;
+    margin:auto;
+    width:1000px; 
+    height:700px;
+}
+
 div#map_principal{
     float:left;
     margin:auto;
     width:800px; 
     height:600px;
+    border:2px solid green;
+}
+
+div#traza_busqueda{
+    float: contour;
+    margin:auto;
+    margin-top: 120px;
+    width:800px; 
+    height:590px;
     border:2px solid green;
 }
 
@@ -58,7 +74,7 @@ div#filtros{
     float:left;
     position:relative;
     width:1200px;
-    
+    border: 1px solid blue;
 }
 
 div#resultado{
@@ -68,4 +84,17 @@ div#resultado{
     position:relative;
     width:1200px;
     border:1px solid blue;
+}
+
+img.lista_alerta{
+    width: 20px; height: 20px;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 550px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
 }

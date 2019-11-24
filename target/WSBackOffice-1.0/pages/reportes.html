@@ -10,8 +10,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-        <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
@@ -19,35 +17,24 @@
             <nav class="nav">
                 <a class="nav-link active" href="ubicacion.html">Monitoreo de la Ubicacion</a>
                 <a class="nav-link" href="reportes.html">Historial de Alertas</a>
+                <a class="nav-link" href="rastreo.html">Rastreo del Ganado</a>
             </nav>
         </div>
         <div id="filtros">
-            <form class="form-inline">
-                <div class="form-group mb-2" style="margin-top:5px;">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="          Fecha: ">
-                </div>
-                <div class="form-group mx-sm-3 mb-2">
-                    <input id="fechaBusqueda" width="276" />
-                    <script>
-                        $('#fechaBusqueda').datepicker({
-                            uiLibrary: 'bootstrap4'
-                        });
-                    </script>
-                </div>
-                <button type="submit" class="btn btn-primary mb-2" onclick="buscarAlertas();">Buscar</button>
-            </form>
+            <label style="margin-right: 10px">Fecha: </label>
+            <input id="fecha_busqueda" style="margin-right: 10px" type="date">
+            <button type="submit" class="btn btn-primary mb-2" onclick="buscarAlertas();">Buscar</button>
         </div>
         <div id ="resultado">
             <div class="table-responsive">          
                 <table class="table">
                     <thead>
                         <tr>
-                                                   
                             <th>Ganado</th>
                             <th>Fecha y Hora</th>
                         </tr>
                     </thead>
-                    <tbody id="tab_alertas">
+                    <tbody id="alertas_listas">
                     </tbody>
                 </table>
             </div>
