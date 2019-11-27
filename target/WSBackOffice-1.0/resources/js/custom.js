@@ -1,26 +1,20 @@
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+        var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
         mapTypeId: google.maps.MapTypeId.SATELLITE,
         streetViewControl: false,
         zoomControl: false,
         fullscreenControl: false,
         mapTypeControl: false,
-        center: {lat: -7.171757, lng: -78.478472}
-    });
-    var ubicaciones = [
-        {"nombreGanado": "Ganado 1", "lat": -7.1727793, "lng": -78.47969, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.1729013, "lng": -78.47932, "zIndex": 5},
-        {"nombreGanado": "Ganado 3", "lat": -7.1723533, "lng": -78.479905, "zIndex": 3},
-        {"nombreGanado": "Ganado 4", "lat": -7.1727203, "lng": -78.478419, "zIndex": 2}];
-    setUbicacion(map, ubicaciones);
+        center: {lat: -7.162959, lng: -78.472325}
+    });    
 }
 
 function setUbicacion(map, ubicaciones) {
     var image = {
-        url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+        url: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
         // This marker is 20 pixels wide by 32 pixels high.
-        size: new google.maps.Size(20, 32),
+        size: new google.maps.Size(32, 32),
         // The origin for this image is (0, 0).
         origin: new google.maps.Point(0, 0),
         // The anchor for this image is the base of the flagpole at (0, 32).
@@ -40,7 +34,7 @@ function setUbicacion(map, ubicaciones) {
             title: flag.nombreGanado,
             zIndex: flag.zindex
         });
-        if (flag.fechaAlerta !== undefined) {
+        if (flag.fechaAlerta !== null) {
             mostrarAlerta(flag.nombreGanado, flag.fechaAlerta);
         }
     }
@@ -67,7 +61,7 @@ function actualizarUbicaciones() {
             zoomControl: false,
             fullscreenControl: false,
             mapTypeControl: false,
-            center: {lat: -7.171757, lng: -78.478472}
+            center: {lat: -7.162959, lng: -78.472325}
         });
         setUbicacion(map, data);
     });
@@ -93,45 +87,15 @@ function buscarTrazado() {
         zoomControl: false,
         fullscreenControl: false,
         mapTypeControl: false,
-        center: {lat: -7.171757, lng: -78.478472}
+        center: {lat: -7.162959, lng: -78.472325}
     });
-    var ubicaciones1 = [
-        {"nombreGanado": "Ganado 1", "lat": -7.172771, "lng": -78.480961, "zIndex": 5},
-        {"nombreGanado": "Ganado 1", "lat": -7.172350, "lng": -78.481111, "zIndex": 5},
-        {"nombreGanado": "Ganado 1", "lat": -7.172207, "lng": -78.481186, "zIndex": 5},
-        {"nombreGanado": "Ganado 1", "lat": -7.172159, "lng": -78.481042, "zIndex": 5},
-        {"nombreGanado": "Ganado 1", "lat": -7.172180, "lng": -78.480811, "zIndex": 5},
-        {"nombreGanado": "Ganado 1", "lat": -7.172202, "lng": -78.480650, "zIndex": 5},
-        {"nombreGanado": "Ganado 1", "lat": -7.172196, "lng": -78.480473, "zIndex": 5}];
-    var ubicaciones2 = [
-        {"nombreGanado": "Ganado 2", "lat": -7.172329, "lng": -78.47969, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172404, "lng": -78.479223, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172532, "lng": -78.479175, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172611, "lng": -78.479111, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172500, "lng": -78.478934, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172409, "lng": -78.478800, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172276, "lng": -78.478687, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172186, "lng": -78.478601, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.171898, "lng": -78.478403, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.171829, "lng": -78.478258, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.171749, "lng": -78.478161, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.171797, "lng": -78.478016, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172037, "lng": -78.478000, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172175, "lng": -78.477984, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172281, "lng": -78.477968, "zIndex": 4},
-        {"nombreGanado": "Ganado 2", "lat": -7.172281, "lng": -78.477861, "zIndex": 4}];
-
-    var ganado = document.getElementById("traza_ganado").value;
-    if (ganado == "Ganado 1") {
-        setUbicacion(map, ubicaciones1);
-    } else {
-        if (ganado == "Ganado 2") {
-            setUbicacion(map, ubicaciones2);
-        } else {
-            setUbicacion(map, ubicaciones2);
-        }
-    }
-
+     var ganado = document.getElementById("traza_ganado").value;
+    $.ajax({
+        url: "http://localhost:8090/WSCore/resources/service/listarCaminoGanado?ganado=" + ganado,
+        dataType: 'json'
+    }).then(function (trazado) {
+        setUbicacionTrazado(map, trazado);
+    });
 }
 
 function llenarTabla(data, contenido) {
@@ -141,7 +105,62 @@ function llenarTabla(data, contenido) {
         contenido.innerHTML += `
         <tr>
             <th>${registro_alerta.nombreGanado}</th>                       
-            <th>${registro_alerta.fechaAlerta}</th>                       
+            <th>${registro_alerta.fechaAlerta}</th>
+            <th><a href='https://maps.google.com/?q=${registro_alerta.lat},${registro_alerta.lon}&z=24&t=h'>Ver en Google Maps</a></th>
         </tr>`
     }
+}
+
+function setUbicacionTrazado(map, ubicaciones) {
+    var shape = {
+        coords: [1, 1, 1, 20, 18, 20, 18, 1],
+        type: 'poly'
+    };
+    for (var i = 0; i < ubicaciones.length; i++) {
+        var flag = ubicaciones[i];
+        var marker = new google.maps.Marker({
+            position: {lat: flag.lat, lng: flag.lng},
+            map: map,
+            icon: obtenerImagenGPS(i, ubicaciones.length),
+            shape: shape,
+            title: flag.nombreGanado,
+            zIndex: flag.zindex
+        });
+    }
+}
+function obtenerImagenGPS(nroUbicacion, totalUbicaciones) {
+    //posicion inicial
+    if (nroUbicacion == 0) {
+        var image = {
+            url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+            // This marker is 20 pixels wide by 32 pixels high.
+            size: new google.maps.Size(32, 32),
+            // The origin for this image is (0, 0).
+            origin: new google.maps.Point(0, 0),
+            // The anchor for this image is the base of the flagpole at (0, 32).
+            anchor: new google.maps.Point(0, 32)
+        };
+    } else if (nroUbicacion == totalUbicaciones - 1) {
+        var image = {
+            //posicion final
+            url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+            // This marker is 20 pixels wide by 32 pixels high.
+            size: new google.maps.Size(32, 32),
+            // The origin for this image is (0, 0).
+            origin: new google.maps.Point(0, 0),
+            // The anchor for this image is the base of the flagpole at (0, 32).
+            anchor: new google.maps.Point(0, 32)
+        };
+    } else {
+        var image = {
+            url: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+            // This marker is 20 pixels wide by 32 pixels high.
+            size: new google.maps.Size(32, 32),
+            // The origin for this image is (0, 0).
+            origin: new google.maps.Point(0, 0),
+            // The anchor for this image is the base of the flagpole at (0, 32).
+            anchor: new google.maps.Point(0, 32)
+        };
+    }
+    return image;
 }
